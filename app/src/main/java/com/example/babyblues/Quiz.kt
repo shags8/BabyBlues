@@ -42,22 +42,22 @@ class Quiz : AppCompatActivity() {
             "Do You Have Feeling Of Guilt??", "No", "Yes", "Maybe"
         )
         var que3 = Questions(
-            "Feeling irritable towards baby and partner", "Yes", "No", "Sometimes"
+            "Feeling irritable towards baby and partner", "No", "Yes", "Sometimes"
         )
         var que4 = Questions(
-            "Feeling sad or tearful ?", "Yes", "No", "Sometimes"
+            "Feeling sad or tearful ?", "No", "Yes", "Sometimes"
         )
         var que5 = Questions(
-            "Overeating or loss of apetite ?", "No", "Not at all", "Yes"
+            "Overeating or loss of apetite ?", "No", "Yes", "Not at all"
         )
         var que6 = Questions(
-            "Problems concentrating or in decision making", "No", "Often", "Yes"
+            "Problems concentrating or in decision making", "No", "Yes", "Often"
         )
         var que7 = Questions(
-            "Problems of bonding with the baby", "No", "Sometimes", "Yes"
+            "Problems of bonding with the baby", "No", "Yes", "Sometimes"
         )
         var que8 = Questions(
-            "Trouble sleeping at night", "Two or more days a week", "Yes", "No"
+            "Trouble sleeping at night", "No", "Yes", "Two or more days a week"
         )
 
         finalquestions.add(que1)
@@ -74,8 +74,7 @@ class Quiz : AppCompatActivity() {
         binding.options.layoutManager = LinearLayoutManager(this)
         binding.options.adapter = optionadapter
         binding.options.hasFixedSize()
-        var name = intent.getStringExtra("name")
-        val userid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        var userid = FirebaseAuth.getInstance().currentUser?.uid.toString()
         var path = buildString {
             append("Users/")
             append(userid)

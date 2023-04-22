@@ -55,18 +55,17 @@ class Signup : Fragment() {
             var phone = binding.phonenumber.text.toString()
             if (name.isNotBlank()&&email.isNotBlank()&&passcode.isNotBlank()&&phone.isNotBlank()){
                 if (Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.toString(),passcode)
-                    val userid = FirebaseAuth.getInstance().currentUser?.uid.toString()
-                    database = FirebaseDatabase.getInstance().getReference("Users")
-                    val User = userdetails(name, email, passcode , phone ,userid)
-                    database.child(userid).setValue(User).addOnSuccessListener {
-                        val intent = Intent(activity,StartQuiz::class.java)
-                        val intent2 = Intent(activity,Quiz::class.java)
-                        intent2.putExtra("name" ,name )
-                        startActivity(intent)
-                        activity?.finish()
-                    }.addOnFailureListener {
-                        Toast.makeText(activity,"ERROR",Toast.LENGTH_SHORT).show()
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.toString(),passcode).addOnSuccessListener {
+                        database = FirebaseDatabase.getInstance().getReference("Users")
+                        val User = userdetails(name, email, passcode , phone )
+                        val userid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+                        database.child(userid).setValue(User).addOnSuccessListener {
+                            val intent = Intent(activity,StartQuiz::class.java)
+                            startActivity(intent)
+                            activity?.finish()
+                        }.addOnFailureListener {
+                            Toast.makeText(activity,"ERROR",Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
                 else{

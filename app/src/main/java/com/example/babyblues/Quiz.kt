@@ -102,6 +102,8 @@ class Quiz : AppCompatActivity() {
 
         binding.button2.setOnClickListener {
             val intent = Intent(this,Finish::class.java)
+            useranswers.add(selectedCardViews[0])
+            database.child(path).setValue(useranswers)
             startActivity(intent)
             finish()
         }

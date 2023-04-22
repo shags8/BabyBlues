@@ -1,16 +1,26 @@
 package com.example.babyblues
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 
 class Finish : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finish)
+        val exitButton = findViewById<Button>(R.id.exitButton)
+        exitButton.setOnClickListener{
+            finishAffinity()
+        }
     }
+
+
+
     override fun onBackPressed() {
         AlertDialog.Builder(this).setTitle("Exit")
             .setMessage("Are you sure?")

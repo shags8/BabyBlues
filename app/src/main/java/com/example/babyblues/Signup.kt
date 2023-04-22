@@ -58,9 +58,8 @@ class Signup : Fragment() {
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.toString(),passcode)
                     val userid = FirebaseAuth.getInstance().currentUser?.uid.toString()
                     database = FirebaseDatabase.getInstance().getReference("Users")
-                    val User = userdetails(name, email, passcode , phone )
-                    val displayName = User.displayName
-                    database.child(displayName.toString()).setValue(User).addOnSuccessListener {
+                    val User = userdetails(name, email, passcode , phone ,userid)
+                    database.child(userid).setValue(User).addOnSuccessListener {
                         val intent = Intent(activity,StartQuiz::class.java)
                         val intent2 = Intent(activity,Quiz::class.java)
                         intent2.putExtra("name" ,name )

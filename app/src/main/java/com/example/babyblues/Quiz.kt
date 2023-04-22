@@ -75,9 +75,10 @@ class Quiz : AppCompatActivity() {
         binding.options.adapter = optionadapter
         binding.options.hasFixedSize()
         var name = intent.getStringExtra("name")
-        val username = currentUser?.email.toString()
+        val userid = FirebaseAuth.getInstance().currentUser?.uid.toString()
         var path = buildString {
-            append("Users")
+            append("Users/")
+            append(userid)
             append("/Answers")
         }
 

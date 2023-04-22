@@ -67,6 +67,9 @@ class Signup : Fragment() {
                             Toast.makeText(activity,"ERROR",Toast.LENGTH_SHORT).show()
                         }
                     }
+                        .addOnFailureListener {
+                            Toast.makeText(activity,"ERROR",Toast.LENGTH_SHORT).show()
+                        }
                 }
                 else{
                     Toast.makeText(activity,"Enter Correct Mail", Toast.LENGTH_SHORT).show()

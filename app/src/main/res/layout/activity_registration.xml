@@ -47,10 +47,11 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/blue"
-        android:gravity="center_horizontal"
-        android:text="Quote"
+        android:layout_marginBottom="80dp"
+        android:backgroundTint="@color/blue"
+        android:gravity="center"
+        android:text="cheerup"
+        android:textColor="@color/white"
         android:textSize="30sp" />
 
 

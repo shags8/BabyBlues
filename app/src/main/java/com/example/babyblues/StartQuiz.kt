@@ -11,6 +11,7 @@ import com.example.babyblues.databinding.ActivityQuizBinding
 import com.example.babyblues.databinding.ActivityStartQuizBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class StartQuiz : AppCompatActivity() {
 
@@ -28,24 +29,26 @@ class StartQuiz : AppCompatActivity() {
             append(userid)
             append("/Quiz")
         }
+        database = FirebaseDatabase.getInstance().getReference(path)
 
         binding.ppd.setOnClickListener{
-            val intent = Intent(this,Quiz::class.java)
-            database.child(path).setValue("P")
-            startActivity(intent)
-            finish()
+            database.setValue("P").addOnSuccessListener {
+                val intent = Intent(this,Quiz::class.java)
+                startActivity(intent)
+                finish()}
+
         }
         binding.ocd.setOnClickListener{
-            val intent = Intent(this,OCDquiz::class.java)
-            database.child(path).setValue("O")
-            startActivity(intent)
-            finish()
+            database.setValue("O").addOnSuccessListener {
+                val intent = Intent(this,Quiz::class.java)
+                startActivity(intent)
+                finish()}
         }
         binding.Adhd.setOnClickListener{
-            val intent = Intent(this,ADHDquiz::class.java)
-            database.child(path).setValue("A")
-            startActivity(intent)
-            finish()
+            database.setValue("A").addOnSuccessListener {
+                val intent = Intent(this,Quiz::class.java)
+                startActivity(intent)
+                finish()}
         }
     }
     override fun onBackPressed() {

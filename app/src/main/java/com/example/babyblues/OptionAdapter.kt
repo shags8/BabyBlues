@@ -9,17 +9,20 @@ import androidx.recyclerview.widget.RecyclerView
 
  var selectedCardViews = mutableListOf<Int>()
 
-class OptionsAdapter(private val questions: Questions) : RecyclerView.Adapter<OptionsAdapter.ViewHolder>() {
+class OptionsAdapter(private val questions : Questions , private val number : Int) : RecyclerView.Adapter<OptionsAdapter.ViewHolder>() {
 
 
-    private var options : List<String> = listOf(questions.option1,questions.option2,questions.option3) as List<String>
 
+
+    private var options1 : List<String> = listOf(questions.option1,questions.option2,questions.option3) as List<String>
+    private var options2 : List<String> = listOf(questions.option1,questions.option2) as List<String>
+    private lateinit var options: List<String>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.options, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int ) {
 
         val option = options[position]
         holder.optionText.text = option
@@ -42,6 +45,10 @@ class OptionsAdapter(private val questions: Questions) : RecyclerView.Adapter<Op
     }
 
     override fun getItemCount(): Int {
+        if (number.equals(2)){options = options2}
+        else{
+            options = options1
+        }
         return options.size
     }
 

@@ -5,23 +5,18 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.babyblues.databinding.ActivityQuizBinding
+import com.example.babyblues.databinding.ActivityAdhdquizBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class Quiz : AppCompatActivity() {
-
+class ADHDquiz : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
     private var questionlist: ArrayList<Questions> = arrayListOf()
-    private lateinit var binding: ActivityQuizBinding
+    private lateinit var binding: ActivityAdhdquizBinding
     private var value = 1
     var useranswers : ArrayList<Int> = arrayListOf()
     private val currentUser = FirebaseAuth.getInstance().currentUser
@@ -29,36 +24,34 @@ class Quiz : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //  setContentView(R.layout.activity_quiz)
-        val binding = ActivityQuizBinding.inflate(layoutInflater)
+        //setContentView(R.layout.activity_adhdquiz)
+        val binding = ActivityAdhdquizBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         var finalquestions: ArrayList<Questions> = arrayListOf()
         binding.button2.isGone = true
         var que1 = Questions(
-            "Attempted a suicide", "No", "Yes", "Not Interested To Tell"
-        )
+            "Do you trouble starting projects?", "No", "Yes",)
         var que2 = Questions(
-            "Do You Have Feeling Of Guilt??", "No", "Yes", "Maybe"
-        )
+            "Do You Have Poor Attention to Detail?", "No", "Yes",)
         var que3 = Questions(
-            "Feeling irritable towards baby and partner", "No", "Yes", "Sometimes"
-        )
+            "Are you easily distracted?", "No", "Yes")
         var que4 = Questions(
-            "Feeling sad or tearful ?", "No", "Yes", "Sometimes"
-        )
+            "When you do focus , do you hyperfocus ?", "No", "Yes",)
         var que5 = Questions(
-            "Overeating or loss of apetite ?", "No", "Yes", "Not at all"
-        )
+            "Do you have bad time management ?", "No", "Yes", )
         var que6 = Questions(
-            "Problems concentrating or in decision making", "No", "Yes", "Often"
-        )
+            "Are you disorganised?", "No", "Yes")
         var que7 = Questions(
-            "Problems of bonding with the baby", "No", "Yes", "Sometimes"
-        )
+            "Are you overemotional", "No", "Yes",)
         var que8 = Questions(
-            "Trouble sleeping at night", "No", "Yes", "Two or more days a week"
-        )
+            "Are you impulsive?", "No", "Yes",)
+        var que9 = Questions(
+            "Are you forgetful?", "No", "Yes",)
+        var que10 = Questions(
+            "Do you have trouble shutting off your brain??", "No", "Yes",)
 
         finalquestions.add(que1)
         finalquestions.add(que2)
@@ -68,9 +61,11 @@ class Quiz : AppCompatActivity() {
         finalquestions.add(que6)
         finalquestions.add(que7)
         finalquestions.add(que8)
+        finalquestions.add(que9)
+        finalquestions.add(que10)
 
         binding.question.text = que1.questions
-        val optionadapter = OptionsAdapter(que1,3)
+        val optionadapter = OptionsAdapter(que1,2)
         binding.options.layoutManager = LinearLayoutManager(this)
         binding.options.adapter = optionadapter
         binding.options.hasFixedSize()
@@ -82,21 +77,21 @@ class Quiz : AppCompatActivity() {
         }
 
         binding.button.setOnClickListener {
-                database = FirebaseDatabase.getInstance().reference
-                useranswers.add(selectedCardViews[0])
-                database.child(path).setValue(useranswers)
-                var que = finalquestions[value]
-                binding.question.text = que.questions
-                val optionadapter = OptionsAdapter(que,3)
-                binding.options.layoutManager = LinearLayoutManager(this)
-                binding.options.adapter = optionadapter
-                binding.options.hasFixedSize()
-                selectedCardViews = mutableListOf()
-                value += 1
-                if (value == 8) {
-                    binding.button.isGone = true
-                    binding.button2.isGone = false
-                }
+            database = FirebaseDatabase.getInstance().reference
+            useranswers.add(selectedCardViews[0])
+            database.child(path).setValue(useranswers)
+            var que = finalquestions[value]
+            binding.question.text = que.questions
+            val optionadapter = OptionsAdapter(que,2)
+            binding.options.layoutManager = LinearLayoutManager(this)
+            binding.options.adapter = optionadapter
+            binding.options.hasFixedSize()
+            selectedCardViews = mutableListOf()
+            value += 1
+            if (value == 10) {
+                binding.button.isGone = true
+                binding.button2.isGone = false
+            }
         }
 
         binding.button2.setOnClickListener {
@@ -106,8 +101,6 @@ class Quiz : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
-
     }
     override fun onBackPressed() {
         AlertDialog.Builder(this).setTitle("Exit")
@@ -120,4 +113,5 @@ class Quiz : AppCompatActivity() {
                 finish()
             }).setNegativeButton("no", null).show()
     }
+
 }

@@ -36,8 +36,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tabs"
+        android:layout_above="@+id/quote"
         android:id="@+id/frame"
-        android:layout_alignParentBottom="true"/>
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/quote"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/blue"
+        android:gravity="center_horizontal"
+        android:text="Quote"
+        android:textSize="30sp" />
 
 
 
